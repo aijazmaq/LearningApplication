@@ -16,9 +16,9 @@ namespace LearningApplication.Services.Implement
             return _context.contacts.ToList();
         }
 
-        public Contact GetContactsByName(Guid id) 
+        public IEnumerable<Contact> GetContactsByName(string name) 
         {
-            return _context.contacts.Find(id);
+            return _context.contacts.Where(cont=> cont.Name == name);
         }
         public int SaveContact(Request request)
         {
@@ -31,5 +31,18 @@ namespace LearningApplication.Services.Implement
             _context.contacts.Add(requestObj );
             return _context.SaveChanges();
         }
+
+        public int UpdateContact(Request request)
+        {
+            var requestObj = new Contact();
+            requestObj.Id = request.Id;
+            requestObj.Name = request.Name;
+            requestObj.Phone = request.Phone;
+            requestObj.Email = request.Email;
+            requestObj.Address = request.Address;
+            _context.contacts.Update(requestObj);
+            return _context.SaveChanges();
+        }
+
     }
 }

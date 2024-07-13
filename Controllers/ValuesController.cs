@@ -27,15 +27,22 @@ namespace LearningApplication.Controllers
         }
 
         [HttpGet("GetContactByName")]
-        public Contact GetContactByName(Guid id) 
+        public IEnumerable<Contact> GetContactByName(string name) 
         {
-            return _valueService.GetContactsByName(id);
+            return _valueService.GetContactsByName(name);
         }
 
         [HttpPost("SaveContact")]
         public int SaveContact(Request request)
         {
           var response = _valueService.SaveContact(request);
+            return response;
+        }
+
+        [HttpPut("UpdateContact")]
+        public int UpdateContact(Request request)
+        {
+            var response = _valueService.UpdateContact(request);
             return response;
         }
     }

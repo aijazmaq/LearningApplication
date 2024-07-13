@@ -18,7 +18,19 @@ namespace LearningApplication
             options.UseInMemoryDatabase("TestDb");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Contact>().HasKey(x => x.Id);
+            modelBuilder.Entity<Response>().HasKey(x => x.Id);
+            modelBuilder.Entity<Request>().HasKey(x => x.Name);
+            //modelBuilder.Entity<Request>().HasKey(x => x.Email);
+        }
+
         public DbSet<Contact> contacts { get; set; }
+        public DbSet<Response> responses { get; set; }
+
+        public DbSet<Request> requests { get; set; }
 
 
 
